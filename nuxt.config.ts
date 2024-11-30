@@ -8,7 +8,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     mongoUri: process.env.MONGO_URI, 
     mongoDb: process.env.MONGO_DB,
-    public: {},
+    public: {
+      password: process.env.NUXT_CSV_DOWNLOAD_PASSWORD,
+    },
   },
 
   compatibilityDate: "2024-11-30",
