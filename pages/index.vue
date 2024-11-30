@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-1 flex-col items-center justify-center px-4">
+  <div class="flex flex-1 flex-col items-center justify-center px-4 pb-5">
     <h1 class="text-3xl sm:text-5xl font-extrabold mb-4 text-center animate-fade-in">
-      <span class="block">Which is Easier to Read?</span>
+      <span class="block sm: mt-5">Which is Easier to Read?</span>
       <span class="block text-purple-400">camelCase or kebab-case?</span>
     </h1>
 
