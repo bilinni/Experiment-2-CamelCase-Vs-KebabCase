@@ -116,7 +116,7 @@ export default {
       const store = useDataStore();
       const user = store.user;
 
-      if (!user.age || !user.experience || !user.preferredStyle) {
+      if (!user) {
         alert("Please fill out the demographics information before proceeding.");
         this.$router.push("/demographics");
       }

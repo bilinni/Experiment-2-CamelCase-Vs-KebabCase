@@ -13,35 +13,58 @@
         Participant Demographics
       </h1>
       <form @submit.prevent="saveDemographics">
+        <!-- Age -->
         <label class="block mb-4">
-          <span class="text-gray-300">Age:</span>
+          <span class="text-gray-300">Age (0-100):</span>
           <input
             type="number"
             v-model="age"
             required
+            min="0"
+            max="100"
             class="w-full mt-2 px-4 py-2 bg-gray-900 text-white border border-gray-700 rounded-md focus:outline-none focus:border-purple-500 hover:border-purple-400 transition"
           />
         </label>
 
+        <!-- Nationality -->
         <label class="block mb-4">
-          <span class="text-gray-300">Programming Experience (years):</span>
-          <input
-            type="number"
-            v-model="experience"
-            required
-            class="w-full mt-2 px-4 py-2 bg-gray-900 text-white border border-gray-700 rounded-md focus:outline-none focus:border-purple-500 hover:border-purple-400 transition"
-          />
-        </label>
-
-        <label class="block mb-6">
-          <span class="text-gray-300">Preferred Style:</span>
+          <span class="text-gray-300">Nationality:</span>
           <select
-            v-model="preferredStyle"
+            v-model="nationality"
             required
             class="w-full mt-2 px-4 py-2 bg-gray-900 text-white border border-gray-700 rounded-md focus:outline-none focus:border-purple-500 hover:border-purple-400 transition"
           >
-            <option value="camelCase">camelCase</option>
-            <option value="kebab-case">kebab-case</option>
+            <option value="native">Native English-Speaking Countries</option>
+            <option value="esl">English as a Second Language (ESL) Countries</option>
+            <option value="efl">English as a Foreign Language (EFL) Countries</option>
+          </select>
+        </label>
+
+        <!-- Level of Education -->
+        <label class="block mb-4">
+          <span class="text-gray-300">Level of Education:</span>
+          <select
+            v-model="education"
+            required
+            class="w-full mt-2 px-4 py-2 bg-gray-900 text-white border border-gray-700 rounded-md focus:outline-none focus:border-purple-500 hover:border-purple-400 transition"
+          >
+            <option value="hs">High School or Lower</option>
+            <option value="undergraduate">Undergraduate Degree</option>
+            <option value="postgraduate">Postgraduate Degree</option>
+          </select>
+        </label>
+
+        <!-- Computing Experience -->
+        <label class="block mb-6">
+          <span class="text-gray-300">Computing Experience:</span>
+          <select
+            v-model="computingExperience"
+            required
+            class="w-full mt-2 px-4 py-2 bg-gray-900 text-white border border-gray-700 rounded-md focus:outline-none focus:border-purple-500 hover:border-purple-400 transition"
+          >
+            <option value="minimal">Minimal (uses computers infrequently)</option>
+            <option value="moderate">Moderate (uses computers regularly)</option>
+            <option value="advanced">Advanced (programming or technical background)</option>
           </select>
         </label>
 
@@ -63,8 +86,9 @@ export default {
   data() {
     return {
       age: null,
-      experience: null,
-      preferredStyle: "camelCase",
+      nationality: null,
+      education: null,
+      computingExperience: null,
     };
   },
   methods: {
@@ -73,8 +97,9 @@ export default {
 
       store.setUser({
         age: this.age,
-        experience: this.experience,
-        preferredStyle: this.preferredStyle,
+        nationality: this.nationality,
+        education: this.education,
+        computingExperience: this.computingExperience,
       });
 
       this.$router.push("/experiment");
@@ -132,7 +157,6 @@ export default {
   animation: floating-slow 8s ease-in-out infinite;
 }
 
-/* General Styling */
 body {
   font-family: "Inter", "Roboto", sans-serif;
   margin: 0;
