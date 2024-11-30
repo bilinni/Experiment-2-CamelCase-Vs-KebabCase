@@ -3,9 +3,8 @@ import { createObjectCsvStringifier } from "csv-writer";
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
-  
-  const client = await MongoClient.connect(config.mongoUri, {
-  });
+
+  const client = await MongoClient.connect(config.mongoUri, {});
 
   try {
     const db = client.db(config.mongoDb);
@@ -20,11 +19,13 @@ export default defineEventHandler(async (event) => {
     const csvStringifier = createObjectCsvStringifier({
       header: [
         { id: "user.age", title: "Age" },
-        { id: "user.experience", title: "Experience" },
-        { id: "user.preferredStyle", title: "Preferred Style" },
+        { id: "user.nationality", title: "Nationality" },
+        { id: "user.education", title: "Education Level" },
+        { id: "user.computingExperience", title: "Computing Experience" },
         { id: "task", title: "Task" },
         { id: "selected", title: "Selected Answer" },
         { id: "correct", title: "Correct" },
+        { id: "type", title: "Case Type" },
         { id: "timeTaken", title: "Time Taken (ms)" },
         { id: "timestamp", title: "Submission Timestamp" },
       ],
@@ -33,11 +34,13 @@ export default defineEventHandler(async (event) => {
     const csvRows = results.flatMap((result) =>
       result.answers.map((answer: any) => ({
         "user.age": result.user.age,
-        "user.experience": result.user.experience,
-        "user.preferredStyle": result.user.preferredStyle,
+        "user.nationality": result.user.nationality,
+        "user.education": result.user.education,
+        "user.computingExperience": result.user.computingExperience,
         task: answer.task,
         selected: answer.selected,
         correct: answer.correct,
+        type: answer.type, 
         timeTaken: answer.timeTaken,
         timestamp: result.metadata.timestamp,
       }))
