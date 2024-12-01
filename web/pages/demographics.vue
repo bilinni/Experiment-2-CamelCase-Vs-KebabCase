@@ -28,15 +28,15 @@
 
         <!-- Nationality -->
         <label class="block mb-4">
-          <span class="text-gray-300">Nationality:</span>
+          <span class="text-gray-300">English level:</span>
           <select
-            v-model="nationality"
+            v-model="english"
             required
             class="w-full mt-2 px-4 py-2 bg-gray-900 text-white border border-gray-700 rounded-md focus:outline-none focus:border-purple-500 hover:border-purple-400 transition"
           >
-            <option value="native">Native English-Speaking Countries</option>
-            <option value="esl">English as a Second Language (ESL) Countries</option>
-            <option value="efl">English as a Foreign Language (EFL) Countries</option>
+            <option value="native">Native</option>
+            <option value="esl">English as a Second Language</option>
+            <option value="efl">English as a Foreign Language</option>
           </select>
         </label>
 
@@ -56,7 +56,7 @@
 
         <!-- Computing Experience -->
         <label class="block mb-6">
-          <span class="text-gray-300">Computing Experience:</span>
+            <span class="text-gray-300">Computer Proficiency:</span>
           <select
             v-model="computingExperience"
             required
@@ -86,7 +86,7 @@ export default {
   data() {
     return {
       age: null,
-      nationality: null,
+      english: null,
       education: null,
       computingExperience: null,
     };
@@ -97,7 +97,7 @@ export default {
 
       store.setUser({
         age: this.age,
-        nationality: this.nationality,
+        english: this.english,
         education: this.education,
         computingExperience: this.computingExperience,
       });

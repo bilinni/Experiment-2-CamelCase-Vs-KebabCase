@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
     const csvStringifier = createObjectCsvStringifier({
       header: [
         { id: "user.age", title: "Age" },
-        { id: "user.nationality", title: "Nationality" },
+        { id: "user.english", title: "English level" },
         { id: "user.education", title: "Education Level" },
         { id: "user.computingExperience", title: "Computing Experience" },
         { id: "task", title: "Task" },
@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
     const csvRows = results.flatMap((result) =>
       result.answers.map((answer: any) => ({
         "user.age": result.user.age,
-        "user.nationality": result.user.nationality,
+        "user.english": result.user.english,
         "user.education": result.user.education,
         "user.computingExperience": result.user.computingExperience,
         task: answer.task,
