@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       questions: [],
-      currentIndex: 1,
+      currentIndex: 0,
       loading: true,
       selectedAnswer: null,
       startTime: null,
@@ -94,7 +94,7 @@ export default {
     nextTask() {
       this.selectedAnswer = null;
 
-      if (this.currentIndex + 1 < this.questions.length) {
+      if (this.currentIndex < this.questions.length - 1) {
         this.currentIndex++;
         this.startTime = Date.now(); 
       } else {
@@ -104,9 +104,12 @@ export default {
     async submitResults() {
       console.log("Submitting results...");
       const store = useDataStore();
+
       try {
-        await store.submitData();
-        this.$router.push("/thank-you");
+        if (store.experiment.answers.length === this.questions.length) {
+          await store.submitData();
+          this.$router.push("/thank-you");
+        }
       } catch (error) {
         console.error("Error submitting results:", error);
         alert("There was an error submitting your results. Please try again.");
@@ -116,7 +119,7 @@ export default {
       const store = useDataStore();
       const user = store.user;
 
-      if (!user) {
+      if (!user || !user.age ) {
         alert("Please fill out the demographics information before proceeding.");
         this.$router.push("/demographics");
       }
