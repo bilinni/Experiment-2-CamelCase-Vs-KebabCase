@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       questions: [],
-      currentIndex: 0,
+      currentIndex: 1,
       loading: true,
       selectedAnswer: null,
       startTime: null,
