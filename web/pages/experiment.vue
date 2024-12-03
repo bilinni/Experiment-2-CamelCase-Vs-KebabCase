@@ -68,7 +68,7 @@ export default {
         const response = await fetch("/api/questions");
         this.questions = await response.json();
         this.loading = false;
-        this.startTime = Date.now(); 
+        this.startTime = Date.now();
       } catch (error) {
         console.error("Error fetching questions:", error);
       }
@@ -76,6 +76,10 @@ export default {
     selectOption(option) {
       const store = useDataStore();
       const timeTaken = Date.now() - this.startTime;
+
+      if (store.experiment.answers.length === this.questions.length) {
+        return;
+      }
 
       store.addAnswer({
         task: this.currentTask.sentence,
@@ -96,9 +100,10 @@ export default {
 
       if (this.currentIndex < this.questions.length - 1) {
         this.currentIndex++;
-        this.startTime = Date.now(); 
+        this.startTime = Date.now();
       } else {
-        this.submitResults(); 
+        this.currentIndex++;
+        this.submitResults();
       }
     },
     async submitResults() {
@@ -106,10 +111,8 @@ export default {
       const store = useDataStore();
 
       try {
-        if (store.experiment.answers.length === this.questions.length) {
-          await store.submitData();
-          this.$router.push("/thank-you");
-        }
+        await store.submitData();
+        this.$router.push("/thank-you");
       } catch (error) {
         console.error("Error submitting results:", error);
         alert("There was an error submitting your results. Please try again.");
@@ -119,14 +122,16 @@ export default {
       const store = useDataStore();
       const user = store.user;
 
-      if (!user || !user.age ) {
-        alert("Please fill out the demographics information before proceeding.");
+      if (!user || !user.age) {
+        alert(
+          "Please fill out the demographics information before proceeding."
+        );
         this.$router.push("/demographics");
       }
     },
   },
   mounted() {
-    this.checkDemographics(); 
+    this.checkDemographics();
     this.fetchQuestions();
   },
 };
